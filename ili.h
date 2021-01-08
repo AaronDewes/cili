@@ -1,3 +1,6 @@
+#ifndef ILI_H
+#define ILI_H
+
 #include <Python.h>
 
 typedef struct {
@@ -57,3 +60,5 @@ void draw_arc(ILIObject *self, uint16_t pos_x, uint16_t pos_y, uint16_t radius, 
 
 void draw_vertical_line(ILIObject *self, uint16_t pos_x1, uint16_t pos_y1, uint16_t length);
 void draw_horizontal_line(ILIObject *self, uint16_t pos_x1, uint16_t pos_y1, uint16_t length);
+
+#endif

@@ -18,7 +18,7 @@ void set_area(ILIObject *self, uint16_t pos_x1, uint16_t pos_y1, uint16_t pos_x2
     cmd(self, 0x2c);
 }
 
-void init_display(ILIObject *self){
+void init_display(ILIObject *self) {
     int rotate = 0x88;
 
     setup_pins(self);

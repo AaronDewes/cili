@@ -8,14 +8,14 @@ def read(*paths):
         return file_handler.read()
 
 setup(
-    name="gfxcili",
+    name="umbrui_gfxcili",
     version="0.3.1",
-    url="https://github.com/bkosciow/cili",
+    url="https://github.com/AaronDewes/cili",
     license="MIT",
-    author="Bartosz Kościów",
-    author_email="kosci1@gmail.com",
-    description="GfxCili = GfxLCD in C",
-    long_description=(read('README.rst')),
+    author="Aaron Dewes",
+    author_email="aaron.dewes@web.de",
+    description="GfxCili for UmbrUI",
+    long_description=(read('README.md')),
     keywords=[
         'gfxlcd', 'raspberry pi', 'ili9328', 'ili9486', 'gfxcili'
     ],
@@ -34,12 +34,14 @@ setup(
         Extension(
             "gfxcili.ili9325",
             ["_cili9325.c", "_cili.c", "ili.c", "cili9325.c", "interface.c", "spi.c", "gpio.c"],
-            extra_link_args=['-lwiringPi', '-ljpeg', '-lpng']
+            extra_link_args=['-lwiringPi', '-ljpeg', '-lpng'],
+            extra_compile_args=['-O2']
         ),
         Extension(
             "gfxcili.ili9486",
             ["_cili9486.c", "_cili.c", "ili.c", "cili9486.c", "interface.c", "spi.c", "gpio.c"],
-            extra_link_args=['-lwiringPi', '-ljpeg', '-lpng']
+            extra_link_args=['-lwiringPi', '-ljpeg', '-lpng'],
+            extra_compile_args=['-O2']
         ),
     ],
 )

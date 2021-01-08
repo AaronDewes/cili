@@ -61,7 +61,7 @@ void fill_rect(ILIObject *self, uint16_t pos_x1, uint16_t pos_y1, uint16_t pos_x
     unsigned int size = (abs(pos_x2 - pos_x1) + 1) * (abs(pos_y2 - pos_y1) + 1);
     set_area(self, min(pos_x1, pos_x2), min(pos_y1, pos_y2), max(pos_x1, pos_x2), max(pos_y1, pos_y2));
     int i;
-    for(i=0; i<size; i++){
+    for(i=0; i<size; i++) {
         data(self, self->background_color);
     }
 }
@@ -78,7 +78,7 @@ void draw_pixel(ILIObject *self, uint16_t pos_x1, uint16_t pos_y1, uint16_t colo
 void draw_vertical_line(ILIObject *self, uint16_t pos_x1, uint16_t pos_y1, uint16_t length) {
     set_area(self, pos_x1, pos_y1, pos_x1, pos_y1 + length);
     int i;
-    for(i=0; i<length; i++){
+    for(i=0; i<length; i++) {
         data(self, self->color);
     }
 }
@@ -86,14 +86,16 @@ void draw_vertical_line(ILIObject *self, uint16_t pos_x1, uint16_t pos_y1, uint1
 void draw_horizontal_line(ILIObject *self, uint16_t pos_x1, uint16_t pos_y1, uint16_t length) {
     set_area(self, pos_x1, pos_y1, pos_x1 + length, pos_y1);
     int i;
-    for(i=0; i<length; i++){
+    for(i=0; i<length; i++) {
         data(self, self->color);
     }
 }
 
 void swap(uint16_t *a, uint16_t *b) {
-   uint16_t t;
-   t  = *b; *b = *a; *a = t;
+    uint16_t t;
+    t  = *b;
+    *b = *a;
+    *a = t;
 }
 
 int calculate_line_appendix(int appendix) {
@@ -194,7 +196,7 @@ void draw_line(ILIObject *self, uint16_t pos_x1, uint16_t pos_y1, uint16_t pos_x
     calculate_line_steps(steps, length, step, required_length);
 
     int delta_x=0, delta_y=0, i;
-    for (i=0; i<step;i++) {
+    for (i=0; i<step; i++) {
         //printf("i = %d \n", i);
         if (horizontal == 1) {
             draw_horizontal_line(
@@ -244,14 +246,30 @@ void draw_arc(ILIObject *self, uint16_t pos_x, uint16_t pos_y, uint16_t radius, 
     start_r = start * M_PI / 180;
     end_r = end * M_PI / 180;
     while (offset_x >= offset_y) {
-        if (start_r <= atan2(offset_y, offset_x) && atan2(offset_y, offset_x) <= end_r) {draw_pixel(self, pos_x + offset_x, pos_y + offset_y, -1);}
-        if (start_r <= atan2(offset_x, offset_y) && atan2(offset_x, offset_y) <= end_r) {draw_pixel(self, pos_x + offset_y, pos_y + offset_x, -1);}
-        if (start_r <= atan2(offset_x, -offset_y) && atan2(offset_x, -offset_y) <= end_r) {draw_pixel(self, pos_x - offset_y, pos_y + offset_x, -1);}
-        if (start_r <= atan2(offset_y, -offset_x) && atan2(offset_y, -offset_x) <= end_r) {draw_pixel(self, pos_x - offset_x, pos_y + offset_y, -1);}
-        if (start_r <= atan2(-offset_y, -offset_x) + 2*M_PI && atan2(-offset_y, -offset_x) + 2*M_PI <= end_r) {draw_pixel(self, pos_x - offset_x, pos_y - offset_y, -1);}
-        if (start_r <= atan2(-offset_x, -offset_y) + 2*M_PI && atan2(-offset_x, -offset_y) + 2*M_PI <= end_r) {draw_pixel(self, pos_x - offset_y, pos_y - offset_x, -1);}
-        if (start_r <= atan2(-offset_x, offset_y) + 2*M_PI && atan2(-offset_x, offset_y) + 2*M_PI <= end_r) {draw_pixel(self, pos_x + offset_y, pos_y - offset_x, -1);}
-        if (start_r <= atan2(-offset_y, offset_x) + 2*M_PI && atan2(-offset_y, offset_x) + 2*M_PI <= end_r) {draw_pixel(self, pos_x + offset_x, pos_y - offset_y, -1);}
+        if (start_r <= atan2(offset_y, offset_x) && atan2(offset_y, offset_x) <= end_r) {
+            draw_pixel(self, pos_x + offset_x, pos_y + offset_y, -1);
+        }
+        if (start_r <= atan2(offset_x, offset_y) && atan2(offset_x, offset_y) <= end_r) {
+            draw_pixel(self, pos_x + offset_y, pos_y + offset_x, -1);
+        }
+        if (start_r <= atan2(offset_x, -offset_y) && atan2(offset_x, -offset_y) <= end_r) {
+            draw_pixel(self, pos_x - offset_y, pos_y + offset_x, -1);
+        }
+        if (start_r <= atan2(offset_y, -offset_x) && atan2(offset_y, -offset_x) <= end_r) {
+            draw_pixel(self, pos_x - offset_x, pos_y + offset_y, -1);
+        }
+        if (start_r <= atan2(-offset_y, -offset_x) + 2*M_PI && atan2(-offset_y, -offset_x) + 2*M_PI <= end_r) {
+            draw_pixel(self, pos_x - offset_x, pos_y - offset_y, -1);
+        }
+        if (start_r <= atan2(-offset_x, -offset_y) + 2*M_PI && atan2(-offset_x, -offset_y) + 2*M_PI <= end_r) {
+            draw_pixel(self, pos_x - offset_y, pos_y - offset_x, -1);
+        }
+        if (start_r <= atan2(-offset_x, offset_y) + 2*M_PI && atan2(-offset_x, offset_y) + 2*M_PI <= end_r) {
+            draw_pixel(self, pos_x + offset_y, pos_y - offset_x, -1);
+        }
+        if (start_r <= atan2(-offset_y, offset_x) + 2*M_PI && atan2(-offset_y, offset_x) + 2*M_PI <= end_r) {
+            draw_pixel(self, pos_x + offset_x, pos_y - offset_y, -1);
+        }
         if (err <= 0) {
             offset_y += 1;
             err += 2*offset_y + 1;
@@ -281,14 +299,14 @@ void draw_text(ILIObject *self, uint16_t pos_x, uint16_t pos_y, char *text, uint
     height = PyLong_AsLong(PyTuple_GetItem(size, 1));
     Py_DECREF(size);
 
-    for (i=0;i<len;i++) {
+    for (i=0; i<len; i++) {
         rows = PyObject_CallMethod(self->font, "get", "c", text[i]);
         if (with_background) {
             set_area(self, pos_x + offset, pos_y, pos_x + offset + width - 1, pos_y + height - 1);
         }
-        for (j=0;j<height;j++) {
+        for (j=0; j<height; j++) {
             letter = PyLong_AsLong(PyList_GetItem(rows, j));
-            for(z=0;z<width;z++) {
+            for(z=0; z<width; z++) {
                 if (letter & 0x01) {
                     if (with_background) {
                         data(self, self->color);
@@ -315,9 +333,9 @@ static int is_transparent(ILIObject *self, int r, int g, int b) {
     int i;
     for(i=0; i<self->is_transparency; i++) {
         if (self->transparency[i].r == r &&
-            self->transparency[i].g == g &&
-            self->transparency[i].b == b)
-            {
+                self->transparency[i].g == g &&
+                self->transparency[i].b == b)
+        {
             return 1;
         }
     }
@@ -341,8 +359,8 @@ void draw_object_image(ILIObject *self, uint16_t pos_x, uint16_t pos_y, PyObject
     for(j=0; j<height; j++) {
         for (i=0; i<width; i++) {
             pixel = PyObject_CallMethod(
-                image, "getpixel","((i,i))", i, j
-            );
+                        image, "getpixel","((i,i))", i, j
+                    );
             r = PyLong_AsLong(PyTuple_GetItem(pixel, 0));
             g = PyLong_AsLong(PyTuple_GetItem(pixel, 1));
             b = PyLong_AsLong(PyTuple_GetItem(pixel, 2));
@@ -358,8 +376,8 @@ void draw_object_image(ILIObject *self, uint16_t pos_x, uint16_t pos_y, PyObject
                 temp_area[3] = pos_y + j;
             } else {
                 if (temp_area[0] != -1) {
-                     set_area(self, temp_area[0], temp_area[1], temp_area[2], temp_area[3]);
-                     temp_area[0] = -1;
+                    set_area(self, temp_area[0], temp_area[1], temp_area[2], temp_area[3]);
+                    temp_area[0] = -1;
                 }
                 data(self, get_color(r, g, b));
             }
@@ -401,7 +419,7 @@ void draw_jpeg_file_image(ILIObject *self, uint16_t pos_x, uint16_t pos_y, FILE 
     row_stride = cinfo.output_width * cinfo.output_components;
     /* Make a one-row-high sample array that will go away when done with image */
     buffer = (*cinfo.mem->alloc_sarray)
-        ((j_common_ptr) &cinfo, JPOOL_IMAGE, row_stride, 1);
+             ((j_common_ptr) &cinfo, JPOOL_IMAGE, row_stride, 1);
 
     set_area(self, pos_x, pos_y, pos_x + cinfo.output_width - 1, pos_y + cinfo.output_height - 1);
     /* Here we use the library's state variable cinfo.output_scanline as the
@@ -430,8 +448,8 @@ void draw_jpeg_file_image(ILIObject *self, uint16_t pos_x, uint16_t pos_y, FILE 
                 temp_area[3] = pos_y + cinfo.output_scanline;
             } else {
                 if (temp_area[0] != -1) {
-                     set_area(self, temp_area[0], temp_area[1], temp_area[2], temp_area[3]);
-                     temp_area[0] = -1;
+                    set_area(self, temp_area[0], temp_area[1], temp_area[2], temp_area[3]);
+                    temp_area[0] = -1;
                 }
                 data(self, get_color(red, green, blue));
             }
@@ -495,13 +513,13 @@ void draw_png_file_image(ILIObject *self, uint16_t pos_x, uint16_t pos_y, FILE *
 
     // These color_type don't have an alpha channel then fill it with 0xff.
     if(color_type == PNG_COLOR_TYPE_RGB ||
-     color_type == PNG_COLOR_TYPE_GRAY ||
-     color_type == PNG_COLOR_TYPE_PALETTE)
+            color_type == PNG_COLOR_TYPE_GRAY ||
+            color_type == PNG_COLOR_TYPE_PALETTE)
         png_set_filler(png, 0xFF, PNG_FILLER_AFTER);
 
     if(color_type == PNG_COLOR_TYPE_GRAY ||
-     color_type == PNG_COLOR_TYPE_GRAY_ALPHA)
-    png_set_gray_to_rgb(png);
+            color_type == PNG_COLOR_TYPE_GRAY_ALPHA)
+        png_set_gray_to_rgb(png);
 
     png_read_update_info(png, info);
 
@@ -531,8 +549,8 @@ void draw_png_file_image(ILIObject *self, uint16_t pos_x, uint16_t pos_y, FILE *
                 temp_area[3] = pos_y + y;
             } else {
                 if (temp_area[0] != -1) {
-                   set_area(self, temp_area[0], temp_area[1], temp_area[2], temp_area[3]);
-                   temp_area[0] = -1;
+                    set_area(self, temp_area[0], temp_area[1], temp_area[2], temp_area[3]);
+                    temp_area[0] = -1;
                 }
                 data(self, get_color(red, green, blue));
             }

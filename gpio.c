@@ -29,15 +29,22 @@ static void set_pins(ILIObject *self, uint8_t data) {
 }
 
 static void set_pin(uint8_t pin, unsigned char value) {
-    if (value & 0x01) { digitalWrite(pin, HIGH);} else {digitalWrite(pin, LOW);}
+    if (value & 0x01) {
+        digitalWrite(pin, HIGH);
+    }
+    else {
+        digitalWrite(pin, LOW);
+    }
 }
 
 void gpio_cmd(ILIObject *self, uint16_t data) {
-    digitalWrite(self->RS, LOW); gpio_send(self, data);
+    digitalWrite(self->RS, LOW);
+    gpio_send(self, data);
 }
 
 void gpio_data(ILIObject *self, uint16_t data) {
-    digitalWrite(self->RS, HIGH); gpio_send(self, data);
+    digitalWrite(self->RS, HIGH);
+    gpio_send(self, data);
 }
 
 void gpio_set_cs(ILIObject *self, int state) {

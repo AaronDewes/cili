@@ -9,21 +9,25 @@ int ili_init(ILIObject *self, PyObject *args) {
     Py_ssize_t TupleSize = PyTuple_Size(args);
     if (TupleSize == 14) {
         if (!PyArg_ParseTuple(args, "IIIIIIIIIIIIII", &self->width, &self->height,
-            &self->CS, &self->RS, &self->W, &self->RST,
-            &self->DB8, &self->DB9, &self->DB10, &self->DB11,
-            &self->DB12, &self->DB13, &self->DB14, &self->DB15)) {
+                              &self->CS, &self->RS, &self->W, &self->RST,
+                              &self->DB8, &self->DB9, &self->DB10, &self->DB11,
+                              &self->DB12, &self->DB13, &self->DB14, &self->DB15)) {
             return -1;
         }
         self->SPI = -1;
     } else if (TupleSize == 7) {
-         if (!PyArg_ParseTuple(args, "IIIIIII", &self->width, &self->height,
-            &self->SPI, &self->SPEED,
-            &self->CS, &self->RST, &self->RS)) {
+        if (!PyArg_ParseTuple(args, "IIIIIII", &self->width, &self->height,
+                              &self->SPI, &self->SPEED,
+                              &self->CS, &self->RST, &self->RS)) {
+            return -1;
+        }
+    } else if (TupleSize == 3) {
+        if (!PyArg_ParseTuple(args, "III", &self->width, &self->height, self->rotation)) {
             return -1;
         }
     } else {
         PyErr_SetString(PyExc_RuntimeError,
-                    "Wrong number of parameters: \n width, height, PIN_CS, PIN_RS,PIN_W,PIN_RST,PIN_DB8,PIN_DB9,PIN_DB10,PIN_DB11,PIN_DB12,PIN_DB13,PIN_DB14,PIN_DB15 \n width, height, SPI, SPEED, CS, RST, RS");
+                        "Wrong number of parameters: \n width, height, PIN_CS, PIN_RS,PIN_W,PIN_RST,PIN_DB8,PIN_DB9,PIN_DB10,PIN_DB11,PIN_DB12,PIN_DB13,PIN_DB14,PIN_DB15 \n width, height, SPI, SPEED, CS, RST, RS");
         return -1;
     }
     self->rotation = 0;

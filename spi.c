@@ -17,11 +17,13 @@ static void spi_send(ILIObject *self, uint16_t data) {
 }
 
 void spi_cmd(ILIObject *self, uint16_t data) {
-    digitalWrite(self->RS, LOW); spi_send(self, data);
+    digitalWrite(self->RS, LOW);
+    spi_send(self, data);
 }
 
 void spi_data(ILIObject *self, uint16_t data) {
-    digitalWrite(self->RS, HIGH); spi_send(self, data);
+    digitalWrite(self->RS, HIGH);
+    spi_send(self, data);
 }
 
 void spi_set_cs(ILIObject *self, int state) {

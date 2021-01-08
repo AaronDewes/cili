@@ -5,16 +5,22 @@
 #include "interface.h"
 
 void set_area(ILIObject *self, uint16_t pos_x1, uint16_t pos_y1, uint16_t pos_x2, uint16_t pos_y2) {
-    cmd(self, 0x0020); data(self, pos_x1);
-    cmd(self, 0x0021); data(self, pos_y1);
-    cmd(self, 0x0050); data(self, pos_x1);
-    cmd(self, 0x0052); data(self, pos_y1);
-    cmd(self, 0x0051); data(self, pos_x2);
-    cmd(self, 0x0053); data(self, pos_y2);
+    cmd(self, 0x0020);
+    data(self, pos_x1);
+    cmd(self, 0x0021);
+    data(self, pos_y1);
+    cmd(self, 0x0050);
+    data(self, pos_x1);
+    cmd(self, 0x0052);
+    data(self, pos_y1);
+    cmd(self, 0x0051);
+    data(self, pos_x2);
+    cmd(self, 0x0053);
+    data(self, pos_y2);
     cmd(self, 0x0022);
 }
 
-void init_display(ILIObject *self){
+void init_display(ILIObject *self) {
     int rotation_output = 0x100;
     int rotation_mode = 0x1030;
     int rotation_output2 = 0xa700;
