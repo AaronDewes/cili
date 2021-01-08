@@ -34,14 +34,12 @@ setup(
         Extension(
             "gfxcili.ili9325",
             ["_cili9325.c", "_cili.c", "ili.c", "cili9325.c", "interface.c", "spi.c", "gpio.c"],
-            extra_link_args=['-lwiringPi', '-ljpeg', '-lpng'],
-            extra_compile_args=['-O2']
+            extra_link_args=['-lwiringPi', '-ljpeg', '-lpng']
         ),
         Extension(
             "gfxcili.ili9486",
             ["_cili9486.c", "_cili.c", "ili.c", "cili9486.c", "interface.c", "spi.c", "gpio.c"],
-            extra_link_args=['-lwiringPi', '-ljpeg', '-lpng'],
-            extra_compile_args=['-O2']
+            extra_link_args=['-lwiringPi', '-ljpeg', '-lpng']
         ),
     ],
 )
