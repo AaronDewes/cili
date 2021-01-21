@@ -45,7 +45,7 @@ void setup_pins(ILIObject *self) {
 }
 
 void set_color(ILIObject *self, uint16_t r, uint16_t g, uint16_t b) {
-    self->color = get_color(r,g,b);
+    self->color = (r,g,b);
 }
 
 void set_backgroundcolor(ILIObject *self, uint16_t r, uint16_t g, uint16_t b) {
@@ -53,8 +53,7 @@ void set_backgroundcolor(ILIObject *self, uint16_t r, uint16_t g, uint16_t b) {
 }
 
 uint16_t get_color(uint16_t r, uint16_t g, uint16_t b) {
-    uint32_t rgb = (r << 16) | (g << 8) | b;
-    return ((rgb & 0x00f80000) >> 8) | ((rgb & 0x0000fc00) >> 5) | ((rgb & 0x000000f8) >> 3);
+    return (r, b, g);
 }
 
 void fill_rect(ILIObject *self, uint16_t pos_x1, uint16_t pos_y1, uint16_t pos_x2, uint16_t pos_y2) {
